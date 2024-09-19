@@ -1,14 +1,23 @@
-﻿public class Player
+﻿/// <summary>
+/// Представляет игрока в лабиринте.
+/// </summary>
+public class Player
 {
     public int X { get; private set; }
     public int Y { get; private set; }
 
+    /// <summary>
+    /// Инициализирует новый экземпляр класса Player.
+    /// </summary>
     public Player(int startX, int startY)
     {
         X = startX;
         Y = startY;
     }
 
+    /// <summary>
+    /// Перемещает игрока по лабиринту.
+    /// </summary>
     public void Move(int dx, int dy, Maze maze)
     {
         int newX = X + dx;

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Представляет собой лабиринт с препятствиями, начальной и конечной точками, а также методом поиска пути.
+/// </summary>
 public class Maze
 {
     private int width;
@@ -10,6 +13,9 @@ public class Maze
     public int EndX { get; private set; }
     public int EndY { get; private set; }
 
+    /// <summary>
+    ///  Инициализирует новый экземпляр класса Maze с указанными размерами.
+    /// </summary>
     public Maze(int width, int height)
     {
         this.width = width;
@@ -18,6 +24,9 @@ public class Maze
         GenerateMaze();
     }
 
+    /// <summary>
+    /// Создает схему лабиринта с границами, препятствиями и конечной точкой.
+    /// </summary>
     private void GenerateMaze()
     {
         maze = new char[height, width];
@@ -44,6 +53,15 @@ public class Maze
         maze[EndY, EndX] = 'E';
     }
 
+    /// <summary>
+    /// Рисует лабиринт с параметрами видимости и траектории.
+    /// </summary>
+    /// <param name="playerX">X-координата игрока.</param>
+    /// <param name="playerY">Y-координата игрока.</param>
+    /// <param name="startX">X-координата начальной точки.</param>
+    /// <param name="startY">Y-координата начальной точки.</param>
+    /// <param name="path">Список отображаемых координат пути.</param>
+    /// <param name="viewRadius">Радиус видимости вокруг игрока.</param>
     public void DrawMaze(int playerX, int playerY, int startX, int startY, List<(int, int)> path, int viewRadius = 5)
     {
         for (int y = 0; y < height; y++)
@@ -86,6 +104,12 @@ public class Maze
         Console.WriteLine("Нажмите P для показа пути.");
     }
 
+    /// <summary>
+    /// Ищет путь от начальной точки до конечной точки с помощью алгоритма поиска в ширину (BFS).
+    /// </summary>
+    /// <param name="startX">X-координата начальной точки.</param>
+    /// <param name="startY">Y-координата начальной точки.</param>
+    /// <returns>Список координат, представляющих путь, или null, если путь не найден.</returns>
     public List<(int, int)> FindPath(int startX, int startY)
     {
         bool[,] visited = new bool[height, width];
@@ -122,6 +146,9 @@ public class Maze
         return null; 
     }
 
+    /// <summary>
+    /// Восстанавливает путь от конечной точки к начальной точке, используя словарь предыдущих ячеек.
+    /// </summary>
     private List<(int, int)> ReconstructPath(Dictionary<(int, int), (int, int)> previous, (int, int) start, (int, int) end)
     {
         List<(int, int)> path = new List<(int, int)>();

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Управляет игровым состоянием, перемещениями игроков и взаимодействиями в лабиринте.
+/// </summary>
 public class Game
 {
     private Maze maze;
@@ -8,14 +11,20 @@ public class Game
     private int startX = 1;
     private int startY = 1;
     private bool showPath = false; 
-    private int viewRadius = 5;    
+    private int viewRadius = 5;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр игрового класса.
+    /// </summary>
     public Game(int width, int height)
     {
         maze = new Maze(width, height);
         player = new Player(startX, startY);
     }
 
+    /// <summary>
+    /// Запускает цикл игры, управляя движениями игрока и рисуя лабиринт.
+    /// </summary>
     public void Play()
     {
         List<(int, int)> path = maze.FindPath(startX, startY); 
