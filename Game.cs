@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Game
 {
@@ -6,7 +7,8 @@ public class Game
     private Player player;
     private int startX = 1;
     private int startY = 1;
-    private bool showPath = false;
+    private bool showPath = false; 
+    private int viewRadius = 5;    
 
     public Game(int width, int height)
     {
@@ -16,10 +18,12 @@ public class Game
 
     public void Play()
     {
+        List<(int, int)> path = maze.FindPath(startX, startY); 
+
         while (true)
         {
             Console.Clear();
-            maze.DrawMaze(player.X, player.Y, startX, startY, showPath);
+            maze.DrawMaze(player.X, player.Y, startX, startY, showPath ? path : null, viewRadius); 
 
             var key = Console.ReadKey(true).Key;
             switch (key)
